@@ -17,7 +17,7 @@ public class TodoController(ITodoRepo todoRepo) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Todo>> Create(TodoCreateVm todo)
     {
-        return Ok(await todoRepo.Create(new Todo{ Id = todo.Item }));
+        return Ok(await todoRepo.Create(new Todo{ Item = todo.Item }));
     }
 
     public class TodoCreateVm

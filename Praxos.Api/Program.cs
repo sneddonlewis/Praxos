@@ -4,7 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-string connectionString = "~/praxos.db";
+string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "praxos.db");
+string connectionString = $"Data Source={dbPath}";
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
