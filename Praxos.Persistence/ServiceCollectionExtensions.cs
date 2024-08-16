@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions
                 var conn = new SqliteConnection(connectionString);
                 conn.Open();
                 string createTable = @"
-                    CREATE TABLE IF NOT EXISTS Todos (
+                    CREATE TABLE IF NOT EXISTS Todo (
                     Id TEXT PRIMARY KEY,
                     Item Text TEXT NOT NULL)";
                 conn.Execute(createTable); 

@@ -11,14 +11,19 @@ public class TodoRepo(DbConnection conn) : ITodoRepo
     public async Task<IEnumerable<Todo>> All()
     {
         await conn.OpenAsync();
-        return await conn.QueryAsync<Todo>("SELECT * FROM Todos");
+        return await conn.QueryAsync<Todo>("SELECT * FROM Todo");
     }
 
     public async Task<Todo> Create(Todo entity)
     {
-        entity = entity.GenerateId();
+        var dbEntity = new TodoDb()
+        {
+            Item = entity.Item,
+        };
+        dbEntity = dbEntity.GenerateId();
         await conn.OpenAsync();
-        await conn.InsertAsync(entity);
+        await conn.InsertAsync(dbEntity);
+        entity.Id = dbEntity.Id;
         return entity;
     }
 }

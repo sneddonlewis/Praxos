@@ -1,9 +1,6 @@
-using Dapper.Contrib.Extensions;
-
 namespace Praxos.Application.Models;
 
-public abstract class Entity
+public class Entity
 {
-    [ExplicitKey]
     public string Id { get; set; }
-};
+}
