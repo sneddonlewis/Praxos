@@ -26,7 +26,7 @@ public class TodoRepoTest
     public async Task TestInitialize()
     {
         string createTable = @"
-            CREATE TABLE IF NOT EXISTS Todo (
+            CREATE TABLE IF NOT EXISTS Todos (
             Id TEXT PRIMARY KEY,
             Item Text TEXT NOT NULL)";
         await _connection.OpenAsync();
@@ -36,7 +36,7 @@ public class TodoRepoTest
     [TestCleanup]
     public async Task TestCleanup()
     {
-        string dropTable = "DROP TABLE Todo";
+        string dropTable = "DROP TABLE Todos";
         await _connection.OpenAsync();
         await _connection.ExecuteAsync(dropTable);
     }
@@ -52,7 +52,7 @@ public class TodoRepoTest
     {
         // Arrange
         const string todoItem = "vacuum";
-        var todo = new Todo(todoItem);
+        var todo = new Todo() { Item = todoItem };
         
         // Act
         await _todoRepo.Create(todo);
