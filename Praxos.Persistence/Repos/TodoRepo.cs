@@ -1,18 +1,24 @@
+using System.Data.Common;
+using Dapper;
+using Dapper.Contrib.Extensions;
 using Praxos.Application.Contracts.Persistence;
 using Praxos.Application.Models;
 
 namespace Praxos.Persistence.Repos;
 
-public class TodoRepo : ITodoRepo
+public class TodoRepo(DbConnection conn) : ITodoRepo
 {
-    public Task<IEnumerable<Todo>> All()
+    public async Task<IEnumerable<Todo>> All()
     {
-        throw new NotImplementedException();
+        await conn.OpenAsync();
+        return await conn.QueryAsync<Todo>("SELECT * FROM Todo");
     }
 
-    public Task<Todo> Create(Todo entity)
+    public async Task<Todo> Create(Todo entity)
     {
         entity = entity.GenerateId();
-        throw new NotImplementedException();
+        await conn.OpenAsync();
+        await conn.InsertAsync(entity);
+        return entity;
     }
 }
