@@ -1,3 +1,6 @@
 namespace Praxos.Application.Models;
 
-public abstract record Entity(string Id);
+public abstract class Entity
+{
+    public string Id { get; set; }
+};

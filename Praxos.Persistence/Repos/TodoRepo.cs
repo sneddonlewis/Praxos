@@ -11,7 +11,7 @@ public class TodoRepo(DbConnection conn) : ITodoRepo
     public async Task<IEnumerable<Todo>> All()
     {
         await conn.OpenAsync();
-        return await conn.QueryAsync<Todo>("SELECT * FROM Todo");
+        return await conn.QueryAsync<Todo>("SELECT * FROM Todos");
     }
 
     public async Task<Todo> Create(Todo entity)
