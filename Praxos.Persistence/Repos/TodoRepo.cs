@@ -8,7 +8,7 @@ namespace Praxos.Persistence.Repos;
 
 public class TodoRepo(DbConnection conn) : ITodoRepo
 {
-    public async Task<IEnumerable<Todo>> All()
+    public async Task<IEnumerable<Application.Models.Todo>> All()
     {
         await conn.OpenAsync();
         return await conn.QueryAsync<Todo>("SELECT * FROM Todo");
