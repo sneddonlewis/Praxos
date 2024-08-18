@@ -8,7 +8,7 @@ using Praxos.Persistence.Models.Mapping;
 
 namespace Praxos.Persistence.Repos;
 
-public class TodoRepo(DbConnection conn) : BaseRepo<Todo, TodoDb>(conn, "Todo"), ITodoRepo
+public class TodoRepo(DbConnection conn) : BaseRepo<Todo, TodoEntityDb>(conn, "Todo"), ITodoRepo
 {
     private readonly DbConnection _conn = conn;
     //

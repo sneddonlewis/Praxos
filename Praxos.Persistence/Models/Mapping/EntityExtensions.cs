@@ -5,22 +5,22 @@ namespace Praxos.Persistence.Models.Mapping;
 
 public static class EntityExtensions
 {
-    public static T GenerateId<T>(this T entity) where T : DbEntity
+    public static T GenerateId<T>(this T entity) where T : EntityDb
     {
         entity.Id = Guid.NewGuid().ToString();
         return entity;
     }
     
-    public static TodoDb MapToDb(this Todo entity)
+    public static TodoEntityDb MapToDb(this Todo entity)
     {
-        return new TodoDb()
+        return new TodoEntityDb()
         {
             Id = entity.Id,
             Item = entity.Item,
         };
     }
 
-    public static Todo MapToDomain(this TodoDb entity)
+    public static Todo MapToDomain(this TodoEntityDb entity)
     {
         return new Todo(entity.Item, entity.Id);
     }

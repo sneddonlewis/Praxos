@@ -64,7 +64,8 @@ public class TodoRepoTest
         Assert.AreEqual(todoItem, actual.Item);
         Assert.IsFalse(string.IsNullOrEmpty(actual.Id));
 
-        var found = await _todoRepo.FindById(actual.Id);
-        Console.WriteLine(found);
+        var found = (await _todoRepo.FindById(actual.Id)).First();
+        Assert.AreEqual(actual.Id, found.Id);
+        Assert.AreEqual(actual.Item, found.Item);
     }
 }

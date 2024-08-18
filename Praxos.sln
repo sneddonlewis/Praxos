@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Praxos.Persistence", "Praxo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraxosTest.PersistenceTest", "PraxosTest.PersistenceTest\PraxosTest.PersistenceTest.csproj", "{83304CD2-ABBA-4B88-AD98-93E9C5EE5254}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Praxos.WebApp", "Praxos.WebApp\Praxos.WebApp.csproj", "{C5572C66-1211-4614-8D2E-61318EC1A4D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{83304CD2-ABBA-4B88-AD98-93E9C5EE5254}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83304CD2-ABBA-4B88-AD98-93E9C5EE5254}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83304CD2-ABBA-4B88-AD98-93E9C5EE5254}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5572C66-1211-4614-8D2E-61318EC1A4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5572C66-1211-4614-8D2E-61318EC1A4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5572C66-1211-4614-8D2E-61318EC1A4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5572C66-1211-4614-8D2E-61318EC1A4D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

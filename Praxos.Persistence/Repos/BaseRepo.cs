@@ -11,7 +11,7 @@ namespace Praxos.Persistence.Repos;
 
 public class BaseRepo<TDomain, TPersistence>(DbConnection connection, string table) : IBaseRepo<TDomain>
     where TDomain : Entity
-    where TPersistence : DbEntity
+    where TPersistence : EntityDb
 {
     private readonly IMapper _mapper = RepoMapper.Mapper;
     

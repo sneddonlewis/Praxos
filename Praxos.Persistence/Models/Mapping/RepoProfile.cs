@@ -7,6 +7,6 @@ public class RepoProfile : Profile
 {
     public RepoProfile()
     {
-        CreateMap<Todo, TodoDb>().ReverseMap();
+        CreateMap<Todo, TodoEntityDb>().ReverseMap();
     }
 }
