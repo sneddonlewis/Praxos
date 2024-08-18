@@ -19,3 +19,4 @@ Each project has its own Mapper instance and Dependency Injection Extension.
 - [ ] Auth Server
 - [ ] Expand Repo
 - [ ] Auditable Repo
+- [ ] Web Client with generated services
