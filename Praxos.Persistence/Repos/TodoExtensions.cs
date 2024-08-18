@@ -15,10 +15,6 @@ public static class TodoExtensions
 
     public static Todo MapToDomain(this TodoDb entity)
     {
-        return new Todo()
-        {
-            Id = entity.Id,
-            Item = entity.Item,
-        };
+        return new Todo(entity.Item, entity.Id);
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Praxos.Api.Controllers.ViewModels;
 using Praxos.Application.Contracts.Persistence;
 using Praxos.Application.Models;
 
@@ -17,11 +18,6 @@ public class TodoController(ITodoRepo todoRepo) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Todo>> Create(TodoCreateVm todo)
     {
-        return Ok(await todoRepo.Create(new Todo{ Item = todo.Item }));
-    }
-
-    public class TodoCreateVm
-    {
-        public string Item { get; set; }
+        return Ok(await todoRepo.Create(todo.ToDomain()));
     }
 }

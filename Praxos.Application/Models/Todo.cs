@@ -1,6 +1,3 @@
 namespace Praxos.Application.Models;
 
-public class Todo : Entity
-{
-    public string Item { get; set; }
-}
+public record Todo(string Item, string Id = "") : Entity(Id);

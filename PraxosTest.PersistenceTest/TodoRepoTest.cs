@@ -52,7 +52,7 @@ public class TodoRepoTest
     {
         // Arrange
         const string todoItem = "vacuum";
-        var todo = new Todo() { Item = todoItem };
+        var todo = new Todo(todoItem);
         
         // Act
         await _todoRepo.Create(todo);
