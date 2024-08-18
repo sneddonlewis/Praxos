@@ -13,8 +13,9 @@ public class TodoRepo(DbConnection conn) : ITodoRepo
     public async Task<IEnumerable<Todo>> All()
     {
         await conn.OpenAsync();
-        return (await conn.QueryAsync<TodoDb>("SELECT * FROM Todo"))
-            .Select(t => t.MapToDomain());
+        var dbModels = await conn.QueryAsync<TodoDb>("SELECT * FROM Todo");
+        // .Select(t => t.MapToDomain());
+        return RepoMapper.Mapper.Map<IEnumerable<Todo>>(dbModels);
     }
 
     public async Task<Todo> Create(Todo entity)
