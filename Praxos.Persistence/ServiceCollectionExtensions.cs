@@ -14,15 +14,15 @@ public static class ServiceCollectionExtensions
         return services
             .AddScoped<DbConnection>(sp =>
             {
-                var conn = new SqliteConnection(connectionString);
-                conn.Open();
+                using var connection = new SqliteConnection(connectionString);
+                connection.Open();
                 string createTable = @"
                     CREATE TABLE IF NOT EXISTS Todo (
                     Id TEXT PRIMARY KEY,
                     Item Text TEXT NOT NULL)";
-                conn.Execute(createTable); 
-                return conn;
+                connection.Execute(createTable); 
+                return connection;
             })
-            .AddScoped<ITodoRepo, TodoRepo>();
+            .AddScoped<ITodoRepo>(sp => new TodoRepo(connectionString));
     }
 }

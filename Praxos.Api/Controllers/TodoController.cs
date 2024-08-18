@@ -37,6 +37,6 @@ public class TodoController(ITodoRepo todoRepo) : ControllerBase
     [Route("{id}")]
     public async Task<ActionResult> Delete(string id)
     {
-        return (await todoRepo.Delete(id)) ? Ok() : NotFound();
+        return await todoRepo.Delete(id) ? Ok() : NotFound();
     }
 }

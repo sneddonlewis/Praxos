@@ -3,8 +3,8 @@ using Praxos.Persistence.Models.BaseModels;
 
 namespace Praxos.Persistence.Models;
 
-[Table("Todo")]
-public class TodoEntityDb : EntityDb
+[Table(Tables.Todo)]
+public class TodoDb : EntityDb
 {
     public string Item { get; set; }
 }

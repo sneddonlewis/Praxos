@@ -4,3 +4,18 @@ GET {{Praxos.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{Praxos.Api_HostAddress}}/todo
+Accept: application/json
+
+###
+
+GET {{Praxos.Api_HostAddress}}/todo/8e9178c0-8b2e-49d3-a636-4e879f1f242e
+Accept: application/json
+
+###
+
+DELETE {{Praxos.Api_HostAddress}}/todo/8bb0b6db-3825-44c5-84d7-da6831e43de2
+Accept: application/json
+
+###

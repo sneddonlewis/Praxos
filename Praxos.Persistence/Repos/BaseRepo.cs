@@ -1,8 +1,7 @@
-using System.Data;
-using System.Data.Common;
 using AutoMapper;
 using Dapper;
 using Dapper.Contrib.Extensions;
+using Microsoft.Data.Sqlite;
 using Praxos.Application.Contracts.Persistence;
 using Praxos.Application.Models;
 using Praxos.Persistence.Models.BaseModels;
@@ -10,7 +9,7 @@ using Praxos.Persistence.Models.Mapping;
 
 namespace Praxos.Persistence.Repos;
 
-public class BaseRepo<TDomain, TPersistence>(DbConnection connection, string table) : IBaseRepo<TDomain>
+public class BaseRepo<TDomain, TPersistence>(string connectionString, string table) : IBaseRepo<TDomain>
     where TDomain : Entity
     where TPersistence : EntityDb
 {
@@ -18,6 +17,7 @@ public class BaseRepo<TDomain, TPersistence>(DbConnection connection, string tab
     
     public async Task<IEnumerable<TDomain>> All()
     {
+        await using var connection = new SqliteConnection(connectionString);
         await connection.OpenAsync();
         var pModels = await connection.QueryAsync<TPersistence>($"SELECT * FROM {table}");
         return _mapper.Map<IEnumerable<TDomain>>(pModels);
@@ -25,16 +25,16 @@ public class BaseRepo<TDomain, TPersistence>(DbConnection connection, string tab
 
     public async Task<TDomain> Create(TDomain entity)
     {
+        await using var connection = new SqliteConnection(connectionString);
         var dbEntity = _mapper.Map<TPersistence>(entity);
         dbEntity = dbEntity.GenerateId();
-        await connection.OpenAsync();
         await connection.InsertAsync(dbEntity);
         return _mapper.Map<TDomain>(dbEntity);
     }
 
     public async Task<IEnumerable<TDomain>> FindById(string id)
     {
-        await connection.OpenAsync();
+        await using var connection = new SqliteConnection(connectionString);
         string sql = $"SELECT * FROM {table} WHERE  Id = @Id";
         try
         {
@@ -49,26 +49,17 @@ public class BaseRepo<TDomain, TPersistence>(DbConnection connection, string tab
 
     public async Task<bool> Delete(string id)
     {
-        if (connection.State != ConnectionState.Open)
-        {
-            await connection.OpenAsync();
-        }
-        await connection.OpenAsync();
+        await using var connection = new SqliteConnection(connectionString);
+        string sql = $"DELETE * FROM {table} WHERE  Id = @Id";
         try
         {
-            var result = await connection.DeleteAsync(id);
+            var result = await connection.ExecuteAsync(sql, new { Id = id });
             return true;
         }
-        catch
+        catch (SqliteException ex)
         {
+            Console.WriteLine(ex.Message);
             return false;
-        }
-        finally
-        {
-            if (connection.State == ConnectionState.Open)
-            {
-                await connection.CloseAsync();
-            }
         }
     }
 }

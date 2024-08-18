@@ -11,16 +11,16 @@ public static class EntityExtensions
         return entity;
     }
     
-    public static TodoEntityDb MapToDb(this Todo entity)
+    public static TodoDb MapToDb(this Todo entity)
     {
-        return new TodoEntityDb()
+        return new TodoDb()
         {
             Id = entity.Id,
             Item = entity.Item,
         };
     }
 
-    public static Todo MapToDomain(this TodoEntityDb entity)
+    public static Todo MapToDomain(this TodoDb entity)
     {
         return new Todo(entity.Item, entity.Id);
     }

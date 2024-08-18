@@ -12,14 +12,12 @@ public class TodoRepoTest
 {
     private static readonly string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{nameof(TodoRepoTest)}.db");
     private static readonly string _connectionString = "Data Source=" + _dbPath;
-    private static DbConnection _connection;
     private static ITodoRepo _todoRepo;
     
     [ClassInitialize]
     public static async Task ClassInitialize(TestContext _)
     {
-        _connection = new SqliteConnection(_connectionString);
-        _todoRepo = new TodoRepo(_connection);
+        _todoRepo = new TodoRepo(_connectionString);
     }
     
     [TestInitialize]
@@ -29,16 +27,18 @@ public class TodoRepoTest
             CREATE TABLE IF NOT EXISTS Todo (
             Id TEXT PRIMARY KEY,
             Item Text TEXT NOT NULL)";
-        await _connection.OpenAsync();
-        await _connection.ExecuteAsync(createTable);
+        await using var connection = new SqliteConnection(_connectionString);
+        await connection.OpenAsync();
+        await connection.ExecuteAsync(createTable);
     }
 
     [TestCleanup]
     public async Task TestCleanup()
     {
         string dropTable = "DROP TABLE Todo";
-        await _connection.OpenAsync();
-        await _connection.ExecuteAsync(dropTable);
+        await using var connection = new SqliteConnection(_connectionString);
+        await connection.OpenAsync();
+        await connection.ExecuteAsync(dropTable);
     }
 
     [ClassCleanup]
