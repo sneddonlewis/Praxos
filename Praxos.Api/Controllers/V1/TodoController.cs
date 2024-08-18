@@ -1,11 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Praxos.Api.Controllers.ViewModels;
-using Praxos.Api.Controllers.ViewModels.Mapping;
+using Praxos.Api.Controllers.Mapping;
+using Praxos.Api.Controllers.V1.ViewModels;
 using Praxos.Application.Contracts.Persistence;
 using Praxos.Application.Models;
 
-namespace Praxos.Api.Controllers;
+namespace Praxos.Api.Controllers.V1;
 
 [ApiController]
 [Route("[controller]")]

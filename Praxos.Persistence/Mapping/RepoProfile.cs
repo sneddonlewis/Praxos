@@ -1,7 +1,8 @@
 using AutoMapper;
 using Praxos.Application.Models;
+using Praxos.Persistence.Models;
 
-namespace Praxos.Persistence.Models.Mapping;
+namespace Praxos.Persistence.Mapping;
 
 public class RepoProfile : Profile
 {

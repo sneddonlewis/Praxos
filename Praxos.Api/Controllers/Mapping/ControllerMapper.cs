@@ -1,7 +1,7 @@
 using AutoMapper;
-using Praxos.Application.Models.Mapping;
+using Praxos.Application.Mapping;
 
-namespace Praxos.Api.Controllers.ViewModels.Mapping;
+namespace Praxos.Api.Controllers.Mapping;
 
 public static class ControllerMapper
 {

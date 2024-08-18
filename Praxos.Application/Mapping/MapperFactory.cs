@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace Praxos.Application.Models.Mapping;
+namespace Praxos.Application.Mapping;
 
 public class MapperFactory<TProfile> where TProfile : Profile, new()
 {

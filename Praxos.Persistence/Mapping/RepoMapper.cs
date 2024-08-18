@@ -1,7 +1,7 @@
 using AutoMapper;
-using Praxos.Application.Models.Mapping;
+using Praxos.Application.Mapping;
 
-namespace Praxos.Persistence.Models.Mapping;
+namespace Praxos.Persistence.Mapping;
 
 public static class RepoMapper
 {
