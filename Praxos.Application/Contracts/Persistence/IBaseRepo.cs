@@ -7,4 +7,5 @@ public interface IBaseRepo<T> where T : Entity
     Task<IEnumerable<T>> All();
     Task<T> Create(T entity);
     Task<IEnumerable<T>> FindById(string id);
+    Task<bool> Delete(string id);
 }

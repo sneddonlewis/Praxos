@@ -67,5 +67,9 @@ public class TodoRepoTest
         var found = (await _todoRepo.FindById(actual.Id)).First();
         Assert.AreEqual(actual.Id, found.Id);
         Assert.AreEqual(actual.Item, found.Item);
+
+        var isDeleted = await _todoRepo.Delete(found.Id);
+        Assert.IsTrue(isDeleted);
+        Assert.AreEqual(0, (await _todoRepo.All()).Count());
     }
 }

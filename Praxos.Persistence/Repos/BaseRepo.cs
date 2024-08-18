@@ -1,3 +1,4 @@
+using System.Data;
 using System.Data.Common;
 using AutoMapper;
 using Dapper;
@@ -33,6 +34,7 @@ public class BaseRepo<TDomain, TPersistence>(DbConnection connection, string tab
 
     public async Task<IEnumerable<TDomain>> FindById(string id)
     {
+        await connection.OpenAsync();
         string sql = $"SELECT * FROM {table} WHERE  Id = @Id";
         try
         {
@@ -41,7 +43,32 @@ public class BaseRepo<TDomain, TPersistence>(DbConnection connection, string tab
         }
         catch
         {
-            return Enumerable.Empty<TDomain>();        
+            return [];        
+        }
+    }
+
+    public async Task<bool> Delete(string id)
+    {
+        if (connection.State != ConnectionState.Open)
+        {
+            await connection.OpenAsync();
+        }
+        await connection.OpenAsync();
+        try
+        {
+            var result = await connection.DeleteAsync(id);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+        finally
+        {
+            if (connection.State == ConnectionState.Open)
+            {
+                await connection.CloseAsync();
+            }
         }
     }
 }

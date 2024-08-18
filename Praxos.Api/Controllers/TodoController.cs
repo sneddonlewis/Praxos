@@ -14,7 +14,7 @@ public class TodoController(ITodoRepo todoRepo) : ControllerBase
     private readonly IMapper _mapper = ControllerMapper.Mapper;
     
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Todo>>> Get()
+    public async Task<ActionResult<IEnumerable<Todo>>> GetAll()
     {
         return Ok(await todoRepo.All());
     }
@@ -31,5 +31,12 @@ public class TodoController(ITodoRepo todoRepo) : ControllerBase
     public async Task<ActionResult<Todo>> Create(TodoCreateVm todo)
     {
         return Ok(await todoRepo.Create(_mapper.Map<Todo>(todo)));
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<ActionResult> Delete(string id)
+    {
+        return (await todoRepo.Delete(id)) ? Ok() : NotFound();
     }
 }
