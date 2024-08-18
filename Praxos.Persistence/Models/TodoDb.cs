@@ -6,5 +6,5 @@ namespace Praxos.Persistence.Models;
 [Table(Tables.Todo)]
 public class TodoDb : EntityDb
 {
-    public string Item { get; set; }
+    public string? Item { get; set; }
 }
