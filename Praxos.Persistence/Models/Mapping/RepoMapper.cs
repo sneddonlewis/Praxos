@@ -11,5 +11,4 @@ public static class RepoMapper
     }
     
     public static IMapper Mapper { get; set; }
-    
 }

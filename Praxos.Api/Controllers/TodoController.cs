@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Praxos.Api.Controllers.ViewModels;
 using Praxos.Api.Controllers.ViewModels.Mapping;
@@ -10,6 +11,7 @@ namespace Praxos.Api.Controllers;
 [Route("[controller]")]
 public class TodoController(ITodoRepo todoRepo) : ControllerBase
 {
+    private readonly IMapper _mapper = ControllerMapper.Mapper;
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Todo>>> Get()
     {
@@ -19,6 +21,6 @@ public class TodoController(ITodoRepo todoRepo) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Todo>> Create(TodoCreateVm todo)
     {
-        return Ok(await todoRepo.Create(todo.ToDomain()));
+        return Ok(await todoRepo.Create(_mapper.Map<Todo>(todo)));
     }
 }
