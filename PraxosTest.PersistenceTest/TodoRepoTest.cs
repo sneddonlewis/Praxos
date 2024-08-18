@@ -63,5 +63,8 @@ public class TodoRepoTest
         Todo actual = todos.First();
         Assert.AreEqual(todoItem, actual.Item);
         Assert.IsFalse(string.IsNullOrEmpty(actual.Id));
+
+        var found = await _todoRepo.FindById(actual.Id);
+        Console.WriteLine(found);
     }
 }

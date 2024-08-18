@@ -12,10 +12,19 @@ namespace Praxos.Api.Controllers;
 public class TodoController(ITodoRepo todoRepo) : ControllerBase
 {
     private readonly IMapper _mapper = ControllerMapper.Mapper;
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Todo>>> Get()
     {
         return Ok(await todoRepo.All());
+    }
+    
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<ActionResult<Todo>> GetById(string id)
+    {
+        var result = (await todoRepo.FindById(id)).FirstOrDefault();
+        return result is null ? NotFound() : Ok(result);
     }
     
     [HttpPost]
