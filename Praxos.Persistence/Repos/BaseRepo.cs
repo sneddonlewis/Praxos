@@ -50,15 +50,14 @@ public class BaseRepo<TDomain, TPersistence>(string connectionString, string tab
     public async Task<bool> Delete(string id)
     {
         await using var connection = new SqliteConnection(connectionString);
-        string sql = $"DELETE * FROM {table} WHERE  Id = @Id";
+        string sql = $"DELETE FROM {table} WHERE  Id = @Id";
         try
         {
             var result = await connection.ExecuteAsync(sql, new { Id = id });
             return true;
         }
-        catch (SqliteException ex)
+        catch
         {
-            Console.WriteLine(ex.Message);
             return false;
         }
     }
