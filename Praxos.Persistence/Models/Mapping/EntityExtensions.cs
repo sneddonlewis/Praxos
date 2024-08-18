@@ -1,9 +1,16 @@
 using Praxos.Application.Models;
+using Praxos.Persistence.Models.BaseModels;
 
-namespace Praxos.Persistence.Repos;
+namespace Praxos.Persistence.Models.Mapping;
 
-public static class TodoExtensions
+public static class EntityExtensions
 {
+    public static T GenerateId<T>(this T entity) where T : DbEntity
+    {
+        entity.Id = Guid.NewGuid().ToString();
+        return entity;
+    }
+    
     public static TodoDb MapToDb(this Todo entity)
     {
         return new TodoDb()
@@ -17,4 +24,5 @@ public static class TodoExtensions
     {
         return new Todo(entity.Item, entity.Id);
     }
+
 }

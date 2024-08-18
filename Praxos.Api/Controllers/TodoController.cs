@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Praxos.Api.Controllers.ViewModels;
+using Praxos.Api.Controllers.ViewModels.Mapping;
 using Praxos.Application.Contracts.Persistence;
 using Praxos.Application.Models;
 

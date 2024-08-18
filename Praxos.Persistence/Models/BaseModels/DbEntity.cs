@@ -1,6 +1,6 @@
 using Dapper.Contrib.Extensions;
 
-namespace Praxos.Application.Models;
+namespace Praxos.Persistence.Models.BaseModels;
 
 public abstract class DbEntity
 {
